@@ -51,8 +51,26 @@ install_ubuntu_dependencies() {
 	echo " "
 	echo "Dependecies Installed"
 	echo " "
-	
-	 
 }
 
+install_ubuntu_utilities() {
+	#update_selected
+	echo " "
+	echo "Installing Utilities ..."
+	echo " "
+	sudo apt-get install micro -y
+	sudo apt-get install tilix -y
+	sudo apt-get install net-tools -y 
+	sudo apt-get install screen -y
+	sudo apt-get install htop -y
+	sudo apt-get install links2 -y
+	sudo apt-get install elinks -y
+	sudo apt-get install hddtemp -y
+	sudo apt-get install lm-sensors -y
+	sudo apt-get install pv -y
+	#sudo apt install tightvncserver
+	echo " "
+	echo "Utilities Installed"
+	echo " "
+}
 
