@@ -84,6 +84,33 @@ install_ubuntu_utilities() {
 	echo " "
 }
 
+ubuntu_menu() {
+	stack_install_selection=0
+	echo ""
+	echo "Ubuntu Software Installation"
+	echo ""
+	echo "1)Ubuntu-ML        2)Ubuntu-Miner"
+	echo "3)Ubuntu-Server    4)Raspian-Desktop"
+	echo "5)Raspian-LockCam  6)Raspian-Console"
+	echo "7)Raspian-Robot    8)Back to Menu"
+	echo ""
+	until [[ $stack_install_selection == [1-8] ]]; do
+        	read -p "Selection: " stack_install_selection
+	done
+
+	case $stack_install_selection in
+		1) install_ubuntu_ml;;
+		2) install_ubuntu_miner;;
+		3) install_ubuntu_server;;
+		4) install_rpi_desktop;;
+		5) install_rpi_lockcam;;
+		6) install_rpi_console;;
+		7) install_rpi_robot;;
+		8) echo ""; echo "Exiting . . . "; echo " ";;
+	esac
+}
+
+
 main_menu() {
 	main_menu_selection=0
 	echo ""
