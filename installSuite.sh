@@ -84,3 +84,31 @@ install_ubuntu_utilities() {
 	echo " "
 }
 
+main_menu() {
+	main_menu_selection=0
+	echo ""
+	echo "Welcome to Lock Industries System Utility"
+	echo ""
+	echo "What would you like to do?"
+	echo ""
+	echo "1)Run Updates              2)Configure Network Interface"
+	echo "3)Configure SSH            4)Install Software"
+	echo "5)Full Stack Installation  6)Quit"
+	echo ""
+	until [[ $main_menu_selection == [1-6] ]]; do
+        	read -p "Selection: " main_menu_selection
+	done
+
+	case $main_menu_selection in
+		1) update_selected; main_menu;;
+		2) configure_network_selected; main_menu;;
+		3) configure_ssh_selected; main_menu;;
+		4) install_software_selected; main_menu;;
+		5) full_stack_install_selected; main_menu;;
+		6) echo ""; echo "Exiting . . . "; echo " ";;
+	esac
+}
+
+main_menu
+echo ""
+echo "sudo apt-get update && sudo apt-get upgrade -y  && sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt-get autoremove -y && sudo reboot now"
