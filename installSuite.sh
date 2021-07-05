@@ -91,21 +91,20 @@ main_menu() {
 	echo ""
 	echo "What would you like to do?"
 	echo ""
-	echo "1)Run Updates              2)Configure Network Interface"
-	echo "3)Configure SSH            4)Install Software"
-	echo "5)Full Stack Installation  6)Quit"
+	echo "1)Run Updates"
+	echo "2)Install Ubuntu Software"
+	echo "3)Install Raspberry Software"
+	echo "4)Quit"
 	echo ""
-	until [[ $main_menu_selection == [1-6] ]]; do
+	until [[ $main_menu_selection == [1-4] ]]; do
         	read -p "Selection: " main_menu_selection
 	done
 
 	case $main_menu_selection in
 		1) update_selected; main_menu;;
-		2) configure_network_selected; main_menu;;
-		3) configure_ssh_selected; main_menu;;
-		4) install_software_selected; main_menu;;
-		5) full_stack_install_selected; main_menu;;
-		6) echo ""; echo "Exiting . . . "; echo " ";;
+		2) ubuntu_menu; main_menu;;
+		3) raspberry_menu; main_menu;;
+		4) echo ""; echo "Exiting . . . "; echo " ";;
 	esac
 }
 
