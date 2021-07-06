@@ -10,6 +10,7 @@ update_selected() {
 	sudo apt-get dist-upgrade -y --allow-downgrades
 	sudo apt autoremove -y
 	sudo apt-get autoremove -y
+	echo " "
 	echo "System Updated"
 	echo " "
 }
@@ -59,6 +60,10 @@ install_ubuntu_utilities() {
 	echo " "
 }
 
+nvidia_stack_menu(){
+	echo "pass"
+}
+
 install_lambda_stack() {
 	echo " "
 	echo "Installing Lambda Stack"
@@ -74,6 +79,10 @@ install_lambda_stack() {
 	echo " "
 }
 
+python_stack_menu(){
+	echo "pass"
+}
+
 install_ubuntu_miner(){
 	update_selected
 	echo " "
@@ -86,39 +95,61 @@ install_ubuntu_miner(){
 	echo " "
 }
 
-
-
-
-
-
-
+ubuntu_gui_menu(){
+	echo "pass"
+}
 
 ubuntu_menu() {
-	stack_install_selection=0
+	ubuntu_selection=0
 	echo ""
 	echo "Ubuntu Software Installation"
 	echo ""
-	echo "1)Ubuntu-ML        2)Ubuntu-Miner"
-	echo "3)Ubuntu-Server    4)Raspian-Desktop"
-	echo "5)Raspian-LockCam  6)Raspian-Console"
-	echo "7)Raspian-Robot    8)Back to Menu"
+	echo "1)Ubuntu-Dependencies"
+	echo "2)Ubuntu-Utilities"
+	echo "3)Nvidia-Drivers"
+	echo "4)Lambda-Stack"
+	echo "5)Python-Stacks"
+	echo "6)Ubuntu-GUI-Applications"
+	echo "7)Back to Menu"
 	echo ""
-	until [[ $stack_install_selection == [1-8] ]]; do
-        	read -p "Selection: " stack_install_selection
+	until [[ $ubuntu_selection == [1-8] ]]; do
+        	read -p "Selection: " ubuntu_selection
 	done
 
-	case $stack_install_selection in
-		1) install_ubuntu_ml;;
-		2) install_ubuntu_miner;;
-		3) install_ubuntu_server;;
-		4) install_rpi_desktop;;
-		5) install_rpi_lockcam;;
-		6) install_rpi_console;;
-		7) install_rpi_robot;;
-		8) echo ""; echo "Exiting . . . "; echo " ";;
+	case $ubuntu_selection in
+		1) install_ubuntu_dependencies;;
+		2) install_ubuntu_utilities;;
+		3) nvidia_stack_menu;;
+		4) install_lambda_stack;;
+		5) python_stack_menu;;
+		6) ubuntu_gui_menu;;
+		7) echo ""; echo "Exiting . . . "; echo " ";;
 	esac
 }
 
+raspberry_menu() {
+	raspian_selection=0
+	echo ""
+	echo "Raspian Software Installation"
+	echo ""
+	echo "1)Raspian-Desktop"
+	echo "2)Raspian-Robot"    
+	echo "3)Raspian-LockCam"
+	echo "4)Raspian-Console"
+	echo "5)Back to Menu"
+	echo ""
+	until [[ $raspian_selection == [1-5] ]]; do
+        	read -p "Selection: " raspian_selection
+	done
+
+	case $raspian_selection in
+		1) install_rpi_desktop;;
+		2) install_rpi_robot;;
+		3) install_rpi_lockcam;;
+		4) install_rpi_console;;
+		5) echo ""; echo "Exiting . . . "; echo " ";;
+	esac
+}
 
 main_menu() {
 	main_menu_selection=0
@@ -129,7 +160,7 @@ main_menu() {
 	echo ""
 	echo "1)Run Updates"
 	echo "2)Install Ubuntu Software"
-	echo "3)Install Raspberry Software"
+	echo "3)Install Raspbian Software"
 	echo "4)Quit"
 	echo ""
 	until [[ $main_menu_selection == [1-4] ]]; do
