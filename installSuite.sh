@@ -14,31 +14,6 @@ update_selected() {
 	echo " "
 }
 
-install_lambda_stack() {
-  	LAMBDA_REPO=$(mktemp) && \
-  	wget -O${LAMBDA_REPO} https://lambdalabs.com/static/misc/lambda-stack-repo.deb && \
-  	sudo dpkg -i ${LAMBDA_REPO} && rm -f ${LAMBDA_REPO} && \
-  	sudo apt-get update && sudo apt-get install -y lambda-stack-cuda
-  	sudo reboot
-}
-
-install_ubuntu_miner(){
-	update_selected
-	echo " "
-	echo "Installing Cudo Miner"
-	echo " "
-	sudo su -c "bash <( wget -qO- https://download.cudo.org/tenants/135790374f46b0107c516a5f5e13069b/5e5f800fdf87209fdf8f9b61441e53a1/linux/x64/stable/install.sh )"
-	#gsettings set org.gnome.desktop.background picture-uri file:////home/doclock17/Github/Doclock17/BashPlayGround/automaticWallpaper/inyabackground.png
-	echo " "
-	echo "Cudo Miner Installed"
-	echo " "
-}
-
-
-
-
-
-
 install_ubuntu_dependencies() {
 	update_selected
 	echo " "
@@ -83,6 +58,40 @@ install_ubuntu_utilities() {
 	echo "Utilities Installed"
 	echo " "
 }
+
+install_lambda_stack() {
+	echo " "
+	echo "Installing Lambda Stack"
+	echo " "
+	# Installs lambda stack but currently appears to be broken
+  	LAMBDA_REPO=$(mktemp) && \
+  	wget -O${LAMBDA_REPO} https://lambdalabs.com/static/misc/lambda-stack-repo.deb && \
+  	sudo dpkg -i ${LAMBDA_REPO} && rm -f ${LAMBDA_REPO} && \
+  	sudo apt-get update && sudo apt-get install -y lambda-stack-cuda
+  	sudo reboot
+	echo " "
+	echo "Lambda Stack Installed"
+	echo " "
+}
+
+install_ubuntu_miner(){
+	update_selected
+	echo " "
+	echo "Installing Cudo Miner"
+	echo " "
+	sudo su -c "bash <( wget -qO- https://download.cudo.org/tenants/135790374f46b0107c516a5f5e13069b/5e5f800fdf87209fdf8f9b61441e53a1/linux/x64/stable/install.sh )"
+	#gsettings set org.gnome.desktop.background picture-uri file:////home/doclock17/Github/Doclock17/BashPlayGround/automaticWallpaper/inyabackground.png
+	echo " "
+	echo "Cudo Miner Installed"
+	echo " "
+}
+
+
+
+
+
+
+
 
 ubuntu_menu() {
 	stack_install_selection=0
