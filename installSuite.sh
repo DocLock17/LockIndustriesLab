@@ -78,7 +78,16 @@ install_lambda_stack() {
 	echo "Lambda Stack Installed"
 	echo " "
 }
-
+install_lambda_stack2(){
+	LAMBDA_REPO=$(mktemp) && \
+	wget -O${LAMBDA_REPO} https://lambdalabs.com/static/misc/lambda-stack-repo.deb && \
+	sudo dpkg -i ${LAMBDA_REPO} && rm -f ${LAMBDA_REPO} && \
+	sudo apt-get update && \
+	sudo apt-get --yes upgrade && \
+	sudo apt-get install --yes --no-install-recommends lambda-server && \
+	sudo apt-get install --yes --no-install-recommends nvidia-headless-450 && \
+	sudo apt-get install --yes --no-install-recommends lambda-stack-cuda
+}
 python_stack_menu(){
 	echo "pass"
 }
