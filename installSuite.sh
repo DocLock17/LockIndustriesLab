@@ -64,7 +64,7 @@ nvidia_stack_menu(){
 	echo "pass"
 }
 
-install_lambda_stack() {
+install_lambda_stackOld() {
 	echo " "
 	echo "Installing Lambda Stack"
 	echo " "
@@ -78,7 +78,7 @@ install_lambda_stack() {
 	echo "Lambda Stack Installed"
 	echo " "
 }
-install_lambda_stack2(){
+install_lambda_stack(){
 	LAMBDA_REPO=$(mktemp) && \
 	wget -O${LAMBDA_REPO} https://lambdalabs.com/static/misc/lambda-stack-repo.deb && \
 	sudo dpkg -i ${LAMBDA_REPO} && rm -f ${LAMBDA_REPO} && \
