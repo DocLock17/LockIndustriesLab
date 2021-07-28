@@ -478,7 +478,7 @@ main_menu() {
 			echo " " &&
 			echo "Installing virtual environment resources ..." &&
 			echo " " &&
-			pip3 install -r packagelist.txt &&
+			pip3 install -r raspberrypackagelist.txt &&
 			#pip3 install -r https://raw.githubusercontent.com/DocLock17/CameraProject/main/packagelist.txt &&
 			echo " " &&
 			pip3 install https://dl.google.com/coral/python/tflite_runtime-2.1.0.post1-cp37-cp37m-linux_armv7l.whl &&
