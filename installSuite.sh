@@ -498,6 +498,12 @@ main_menu() {
 			echo "c.JupyterApp.port = 8888" >> /home/pi/.jupyter/jupyter_notebook_config.py &&
 			echo "c.JupyterApp.password = ''" >> /home/pi/.jupyter/jupyter_notebook_config.py
 			echo " " &&
+
+			echo "Downloading BotDrivers"
+			git clone http://www.github.com/DocLock17/BotDrivers
+			echo " "
+
+
 			echo "You will need to restart before changes can take effect ..." &&
 			echo " " &&
 			echo "Installation Complete!" &&
