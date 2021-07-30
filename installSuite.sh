@@ -491,10 +491,10 @@ main_menu() {
 			echo "1"; echo ""
 			sleep 1
 
-			echo "interface $interface_name" #>> /etc/dhcpcd.conf
-			echo "static ip_address=$ip_string" #>> /etc/dhcpcd.conf
-			echo "static routers=$ip_leader.1" #>> /etc/dhcpcd.conf
-			echo "static domain_name_servers=[$ip_leader.1, 8.8.8.8, 7.7.7.7]" #>> /etc/dhcpcd.conf
+			echo "interface $interface_name" >> /etc/dhcpcd.conf
+			echo "static ip_address=$ip_string" >> /etc/dhcpcd.conf
+			echo "static routers=$ip_leader.1" >> /etc/dhcpcd.conf
+			echo "static domain_name_servers=$ip_leader.1 8.8.8.8 7.7.7.7" >> /etc/dhcpcd.conf
 
 			echo "Local IP Address is now: $new_ip"; 
 			echo " "
