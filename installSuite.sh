@@ -419,6 +419,77 @@ main_menu() {
 	# ubuntu menu HERE
 
 	raspberry_menu() {
+
+		install_rpi_static() {
+			echo " "
+			echo "Now configureing Network Interface"
+			echo " "
+
+			while [[ -z $server_number ]]
+			do
+				read -p "Input Unit Number: " server_number
+			done
+			#echo "Unit Number is: $server_number"
+
+			while [[ -z $server_name ]]
+			do
+				read -p "Input Unit Name: " server_name
+			done
+			#echo "Unit Name is: $server_name"
+
+			my_hostname="LIS"$server_number"-"$server_name
+
+			echo "Hostname will be changed to: $my_hostname in 3 seconds"; echo ""
+			sleep 1
+
+			echo "3"; echo ""
+			sleep 1
+
+			echo "2"; echo ""
+			sleep 1
+
+			echo "1"; echo ""
+			sleep 1
+
+			echo "$my_hostname" > /etc/hostname
+			echo "Hostname is now: $my_hostname"; echo ""
+
+			interface_name=$(ip route | grep default | sed -e "s/^.*dev.//" -e "s/.proto.*//")
+			ip_leader=$(hostname -I | cut -d. -f1-3)
+			ip_suffix=$(ip a s $interface_name | awk '/inet / {print$2}'|cut -d/ -f2)
+			new_ip=$ip_leader"."$server_number
+			ip_string=$new_ip"/"$ip_suffix
+			
+			echo "Local IP Address on $interface_name will be changed to: $new_ip in 5 seconds"; echo ""
+			echo "IP Leader is: $ip_leader"
+			echo "$new_ip   $ip_suffix"
+			echo $ip_string
+			# sleep 1
+
+			# echo "5"; echo ""
+			# sleep 1
+
+			# echo "4"; echo ""
+			# sleep 1
+
+			# echo "3"; echo ""
+			# sleep 1
+
+			# echo "2"; echo ""
+			# sleep 1
+
+			# echo "1"; echo ""
+			# sleep 1
+
+			# echo "interface $interface_name" >> /etc/dhcpcd.conf
+			# echo "static ip_address=$ip_string/24" >> /etc/dhcpcd.conf
+			# echo "static routers=$ip_leader.1" >> /etc/dhcpcd.conf
+			# echo "static domain_name_servers=[$ip_leader.1, 8.8.8.8, 7.7.7.7]" >> /etc/dhcpcd.conf
+
+			# echo "Local IP Address is now: $new_ip"; 
+			# echo " "
+		}
+
 		install_rpi_robot() {
 			# Final Setup
 			echo " " &&
@@ -515,7 +586,7 @@ main_menu() {
 		echo ""
 		echo "Raspian Software Installation"
 		echo ""
-		echo "1)Raspian-Desktop"
+		echo "1)Raspian-Static-IP"
 		echo "2)Raspian-Robot"    
 		echo "3)Raspian-LockCam"
 		echo "4)Raspian-Console"
@@ -526,7 +597,7 @@ main_menu() {
 		done
 
 		case $raspian_selection in
-			1) install_rpi_desktop;;
+			1) install_rpi_static;;
 			2) install_rpi_robot;;
 			3) install_rpi_lockcam;;
 			4) install_rpi_console;;
