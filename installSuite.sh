@@ -457,9 +457,13 @@ main_menu() {
 			interface_name=$(ip route | grep default | sed -e "s/^.*dev.//" -e "s/.proto.*//")
 			echo "Test 1"
 			ip_leader=$(hostname -I | cut -d. -f1-3)
+			echo "Test 2"
 			ip_suffix=$(ip a s $interface_name | awk '/inet / {print$2}'|cut -d/ -f2)
+			echo "Test 3"
 			new_ip=$ip_leader"."$server_number
+			echo "Test 4"
 			ip_string=$new_ip"/"$ip_suffix
+			echo "Test 5"
 			
 			echo "Local IP Address on $interface_name will be changed to: $new_ip in 5 seconds"; echo ""
 			echo "IP Leader is: $ip_leader"
