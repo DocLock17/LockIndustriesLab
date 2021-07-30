@@ -454,16 +454,21 @@ main_menu() {
 			echo "$my_hostname" > /etc/hostname
 			echo "Hostname is now: $my_hostname"; echo ""
 
-			interface_name=$(ip route | grep default | sed -e "s/^.*dev.//" -e "s/.proto.*//")
-			echo "Test 1"
+			#interface_name=$(ip route | grep default | sed -e "s/^.*dev.//" -e "s/.proto.*//")
+			
+			interface_name=$(ip route | grep default | sed -e "s/^.*dev.//" -e "s/.src.*//")
+			
+			#echo "Test 1"
 			ip_leader=$(hostname -I | cut -d. -f1-3)
-			echo "Test 2"
+
+			#echo "Test 2"
+			#ip_suffix=24 #$(ip a s $interface_name | awk '/inet / {print$2}'|cut -d/ -f2)
 			ip_suffix=$(ip a s $interface_name | awk '/inet / {print$2}'|cut -d/ -f2)
-			echo "Test 3"
+			#echo "Test 3"
 			new_ip=$ip_leader"."$server_number
-			echo "Test 4"
+			#echo "Test 4"
 			ip_string=$new_ip"/"$ip_suffix
-			echo "Test 5"
+			#echo "Test 5"
 			
 			echo "Local IP Address on $interface_name will be changed to: $new_ip in 5 seconds"; echo ""
 			echo "IP Leader is: $ip_leader"
@@ -487,7 +492,7 @@ main_menu() {
 			# sleep 1
 
 			# echo "interface $interface_name" >> /etc/dhcpcd.conf
-			# echo "static ip_address=$ip_string/24" >> /etc/dhcpcd.conf
+			# echo "static ip_address=$ip_string" >> /etc/dhcpcd.conf
 			# echo "static routers=$ip_leader.1" >> /etc/dhcpcd.conf
 			# echo "static domain_name_servers=[$ip_leader.1, 8.8.8.8, 7.7.7.7]" >> /etc/dhcpcd.conf
 
