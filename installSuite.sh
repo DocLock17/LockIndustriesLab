@@ -452,6 +452,7 @@ main_menu() {
 			sleep 1
 
 			echo "$my_hostname" > /etc/hostname
+			echo "127.0.0.1        $my_hostname" >> /etc/hosts
 			echo "Hostname is now: $my_hostname"; echo ""
 
 			#interface_name=$(ip route | grep default | sed -e "s/^.*dev.//" -e "s/.proto.*//")
@@ -498,6 +499,45 @@ main_menu() {
 
 			echo "Local IP Address is now: $new_ip"; 
 			echo " "
+		}
+
+		configure_raspberry_ssh(){
+			echo " "
+			echo "Configuring SSH"
+			echo " "
+			sudo apt-get install openssh-server -y
+			sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.factory-defaults
+			sudo chmod a-w /etc/ssh/sshd_config.factory-defaults
+
+			echo "MaxSessions 5" >> /etc/ssh/sshd_config
+
+			echo "AllowTcpForwarding yes" >> /etc/ssh/sshd_config
+
+			echo "LogLevel VERBOSE" >> /etc/ssh/sshd_config
+
+			echo "AllowUsers pi doclock17" >> /etc/ssh/sshd_config
+
+			echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
+			
+			# This doesn't work with MAC :(
+			#echo "HostKey /home/doclock17/Desktop/SSH_KEYS/SSH_KEYS" >> /etc/ssh/sshd_config
+			#echo "AuthorizedKeysFile /home/doclock17/Desktop/SSH_KEYS/SSH_KEYS.pub" >> /etc/ssh/sshd_config
+
+			echo "Banner /etc/issue.net" >> /etc/ssh/sshd_config
+			echo "Welcome Back Dr.Locker " >> /etc/issue.net
+			sleep 1
+			#sudo restart ssh
+			sudo systemctl restart ssh
+			echo ""
+			echo "Don't forget to generate rsa keys on CLIENT system using:"
+			echo "ssh-keygen -t rsa"
+			echo ""
+			echo "Then send the keys here using:"
+			echo "ssh-copy-id -i ~/pi/.ssh/id_rsa.pub pi@" $(hostname -I | cut -d. -f1-4)
+			echo ""
+			echo "Then shut-off password authentication:"
+			echo "sudo nano /etc/ssh/sshd_config"
+			echo "sudo systemctl restart ssh"
 		}
 
 		install_rpi_robot() {
@@ -597,10 +637,12 @@ main_menu() {
 		echo "Raspian Software Installation"
 		echo ""
 		echo "1)Configure Raspberry Network"
-		echo "2)Raspian-Robot"    
-		echo "3)Raspian-LockCam"
-		echo "4)Raspian-Console"
-		echo "5)Back to Menu"
+		echo "2)Configure Raspberry SSH"
+		echo "3)Raspian-Desktop"  
+		echo "4)Raspian-Robot"    
+		echo "5)Raspian-LockCam"
+		echo "6)Raspian-Console"
+		echo "7)Back to Menu"
 		echo ""
 		until [[ $raspian_selection == [1-5] ]]; do
 				read -p "Selection: " raspian_selection
@@ -608,10 +650,12 @@ main_menu() {
 
 		case $raspian_selection in
 			1) configure_raspberry_network;;
-			2) install_rpi_robot;;
-			3) install_rpi_lockcam;;
-			4) install_rpi_console;;
-			5) echo ""; echo "Exiting . . . "; echo " ";;
+			2) configure_raspberry_ssh;;
+			3) install_rpi_Desktop;;
+			4) install_rpi_robot;;
+			5) install_rpi_lockcam;;
+			6) install_rpi_console;;
+			7) echo ""; echo "Exiting . . . "; echo " ";;
 		esac
 	}
 
