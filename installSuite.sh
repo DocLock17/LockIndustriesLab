@@ -455,6 +455,7 @@ main_menu() {
 			echo "Hostname is now: $my_hostname"; echo ""
 
 			interface_name=$(ip route | grep default | sed -e "s/^.*dev.//" -e "s/.proto.*//")
+			echo "Test 1"
 			ip_leader=$(hostname -I | cut -d. -f1-3)
 			ip_suffix=$(ip a s $interface_name | awk '/inet / {print$2}'|cut -d/ -f2)
 			new_ip=$ip_leader"."$server_number
