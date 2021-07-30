@@ -420,7 +420,7 @@ main_menu() {
 
 	raspberry_menu() {
 
-		install_rpi_static() {
+		configure_raspberry_network() {
 			echo " "
 			echo "Now configureing Network Interface"
 			echo " "
@@ -596,7 +596,7 @@ main_menu() {
 		echo ""
 		echo "Raspian Software Installation"
 		echo ""
-		echo "1)Raspian-Static-IP"
+		echo "1)Configure Raspberry Network"
 		echo "2)Raspian-Robot"    
 		echo "3)Raspian-LockCam"
 		echo "4)Raspian-Console"
@@ -607,7 +607,7 @@ main_menu() {
 		done
 
 		case $raspian_selection in
-			1) install_rpi_static;;
+			1) configure_raspberry_network;;
 			2) install_rpi_robot;;
 			3) install_rpi_lockcam;;
 			4) install_rpi_console;;
